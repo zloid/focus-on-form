@@ -40,21 +40,25 @@
         <!-- Main form -->
         <form class="main-form" onsubmit="return submitFunctionPreven(event)">
             <div class="mb-3">
-                <input id="main-input" class="form-control input" type="text" value="Siergiej Wojciechowicz" />
-            </div>
-            <div class="mb-3">
-                <textarea id="main-textarea"
-                    class="form-control textarea">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis earum deserunt obcaecati ducimus esse iusto, nemo consequatur reiciendis perferendis nesciunt maxime quas unde odit exercitationem. Quod maiores aliquam ad quia?</textarea>
-            </div>
-            <div class="text-center">
-                <button id="main-submit" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit"
-                    class="btn btn-primary btn-lg">Prześlij</button>
-            </div>
+                <div class="holder"> <small class="label" for="input">Imię i Nazwisko</small>
+                    <input id="main-input" class="form-control input" type="text" value="Siergiej Wojciechowicz" />
+                </div>
+                <br />
+                <div class="mb-3">
+                    <div class="holder"> <small class="label" for="input">Wiadomość</small>
+                        <textarea id="main-textarea"
+                            class="form-control textarea">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis earum deserunt obcaecati ducimus esse iusto. Ipsum dolor sit amet consectetur adipisicing elit.</textarea>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="main-submit" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit"
+                        class="btn btn-primary btn-lg">Prześlij</button>
+                </div>
         </form>
 
-        <div id="loading"></div>
-
     </div>
+
+    <div id="loading"></div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"

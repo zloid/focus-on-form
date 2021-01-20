@@ -61,7 +61,7 @@ async function hitSubmit() {
         // emulate processing data
         await Email.send({})
 
-        document.getElementById('loading').innerHTML = ''
+        document.getElementById('loading').innerHTML = null
 
         console.log('Script working correct!')
     }

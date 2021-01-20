@@ -18,3 +18,15 @@
 #messageFromName, #customModalBody {
     font-weight: bold;
 }
+ 
+.label {
+    padding-left: 14px;
+    padding-top: 4px;
+    position: absolute;
+    color: #aaa;
+}
+
+#main-input, #main-textarea {
+    /* height: 100%; */
+    padding-top: 20px;    
+}
