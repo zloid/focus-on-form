@@ -33,7 +33,13 @@ function submitFunctionPreven(event) {
 
 async function hitSubmit(fullName, message) {
     if (typeof Email !== 'undefined') {
+        document.getElementById(
+            'loading'
+        ).innerHTML = `<img src='./src/spinner.gif' />`
+
         await Email.send({})
+
+        document.getElementById('loading').innerHTML = ''
 
         console.log('await resolve, submit hit, do some...')
         alert(fullName + '\n\n' + message)
