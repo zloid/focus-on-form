@@ -1,6 +1,6 @@
 {
   "name": "focus-on-form",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "",
   "main": "index.html",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/zloid/focus-on-form.git"
   },
-  "author": "zloid",
+  "author": "Siergiej Wojciechowicz",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zloid/focus-on-form/issues"

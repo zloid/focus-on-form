@@ -2,22 +2,43 @@
 
 const localStore = {
     isFocusHit: false,
+    smtpjsScriptIsLoaded: false,
 }
 
 const getMainInput = document.getElementById('main-input')
 const getMainTextarea = document.getElementById('main-textarea')
 const getMainSubmitButton = document.getElementById('main-submit')
+const getMessageFromName = document.getElementById('messageFromName')
+const getModalBody = document.getElementById('customModalBody')
+
+function clickOnModal() {   
+    switch (localStore.smtpjsScriptIsLoaded) {
+        case false:
+            getMessageFromName.innerHTML = 'Proszę podać poprawne dane do wysłania!'
+            getModalBody.innerHTML = 'Proszę podać poprawne dane do wysłania!'
+            return
+        case true:
+            getMessageFromName.innerHTML = getMainInput.value
+            getModalBody.innerHTML = getMainTextarea.value
+            return
+        default:
+            return
+    }
+}
 
 async function loadScript(url) {
     try {
         const response = await fetch(url)
-        console.log(response)
+
         const urlToScript = await response.url
-        console.log(urlToScript)
 
         let scriptToBody = document.createElement('script')
         scriptToBody.src = urlToScript
         document.body.appendChild(scriptToBody)
+
+        console.log(`${url} script is get from url and insert to body`)
+
+        localStore.smtpjsScriptIsLoaded = true
     } catch (error) {
         console.log('Fetch error: ', error)
         alert(
@@ -31,18 +52,18 @@ function submitFunctionPreven(event) {
     return false
 }
 
-async function hitSubmit(fullName, message) {
+async function hitSubmit() {
     if (typeof Email !== 'undefined') {
         document.getElementById(
             'loading'
         ).innerHTML = `<img src='./src/spinner.gif' />`
 
+        // emulate processing data
         await Email.send({})
 
         document.getElementById('loading').innerHTML = ''
 
-        console.log('await resolve, submit hit, do some...')
-        alert(fullName + '\n\n' + message)
+        console.log('Script working correct!')
     }
 }
 
@@ -61,5 +82,7 @@ getMainTextarea.addEventListener('focus', () => {
 })
 
 getMainSubmitButton.addEventListener('click', () => {
-    hitSubmit(getMainInput.value, getMainTextarea.value)
+    clickOnModal()
+    hitSubmit()
 })
+ 

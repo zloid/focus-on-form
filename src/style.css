@@ -3,8 +3,7 @@
     max-width: 856px;
     margin: 40px auto;
     padding: 30px;
-    border-radius: 10px;
-    
+    border-radius: 10px;    
     box-shadow: 0 0 10px rgb(0 0 0 / 44%);
 }
 
@@ -14,4 +13,8 @@
 
 .textarea {
     height: 100px;
+}
+
+#messageFromName, #customModalBody {
+    font-weight: bold;
 }
