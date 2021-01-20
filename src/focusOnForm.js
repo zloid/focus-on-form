@@ -1,5 +1,15 @@
 'use strict'
 
+/* 
+Jak działa program: 
+
+Jeśli nie było focus'a na jednym z pól, okno modalne zgłosi błąd. 
+
+Po focus'ie (na input czy textarea) będzie ładowany asynchronicznie skrypt przetwarzania e-mail (w <body>).
+
+Następnie, jeśli klikniesz przycisk wysyłania danych, wcześniej pobrany skrypt pocztowy zostanie uruchomiony asynchronicznie, pusty, bez danych, co potwierdzi prawidłowe działanie programu. Jednocześnie uruchomi się spinner, a po zakończeniu przetwarzania skryptu zostanie wyświetlony komunikat do konsoli o prawidłowym wykonaniu skryptu.
+*/
+
 const localStore = {
     isFocusHit: false,
     smtpjsScriptIsLoaded: false,
@@ -11,6 +21,9 @@ const getMainSubmitButton = document.getElementById('main-submit')
 const getMessageFromName = document.getElementById('messageFromName')
 const getModalBody = document.getElementById('customModalBody')
 
+/**
+ * Process 2 situation for Modal-board: before e-mail script load and after
+ */
 function clickOnModal() {   
     switch (localStore.smtpjsScriptIsLoaded) {
         case false:
@@ -26,6 +39,10 @@ function clickOnModal() {
     }
 }
 
+/**
+ * For async download of script and inserting it to tag 'body'
+ * @param {string} url 
+ */
 async function loadScript(url) {
     try {
         const response = await fetch(url)
@@ -52,6 +69,10 @@ function submitFunctionPreven(event) {
     return false
 }
 
+/**
+ * For testing correct downloading of e-mail script, and Email object
+ * Also for start and stop of spinner, while await
+ */
 async function hitSubmit() {
     if (typeof Email !== 'undefined') {
         document.getElementById(
@@ -67,6 +88,7 @@ async function hitSubmit() {
     }
 }
 
+// Process focus on input 
 getMainInput.addEventListener('focus', () => {
     if (localStore.isFocusHit === false) {
         loadScript('https://smtpjs.com/v3/smtp.js')
@@ -74,6 +96,7 @@ getMainInput.addEventListener('focus', () => {
     localStore.isFocusHit = true
 })
 
+// Process focus on textarea 
 getMainTextarea.addEventListener('focus', () => {
     if (localStore.isFocusHit === false) {
         loadScript('https://smtpjs.com/v3/smtp.js')
@@ -81,6 +104,7 @@ getMainTextarea.addEventListener('focus', () => {
     localStore.isFocusHit = true
 })
 
+// Process submit actions
 getMainSubmitButton.addEventListener('click', () => {
     clickOnModal()
     hitSubmit()
